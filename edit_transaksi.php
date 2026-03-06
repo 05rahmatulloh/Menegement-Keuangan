@@ -1,8 +1,4 @@
 
-
-
-
-
 <?php
 include "config/database.php";
 
@@ -228,41 +224,49 @@ header("Location: index.php");
 
             <h2>Edit Transaksi</h2>
 
-            <form>
+        <form method="POST">
 
-                <div class="form-group">
-                    <label>Tanggal</label>
-                    <input type="date" name="tanggal" value="<?php echo $row['tanggal']; ?>">
-                </div>
+            <div class="form-group">
+                <label>Tanggal</label>
+                <input type="date" name="tanggal" value="<?php echo $row['tanggal']; ?>">
+            </div>
 
-                <div class="form-group">
-                    <label>Keterangan</label>
-                   <input type="text" name="keterangan" value="<?php echo $row['keterangan']; ?>">
-                </div>
+            <div class="form-group">
+                <label>Keterangan</label>
+                <input type="text" name="keterangan" value="<?php echo $row['keterangan']; ?>">
+            </div>
 
-                <div class="form-group">
-                    <label>Kategori</label>
-                   <input type="text" name="kategori" value="<?php echo $row['kategori']; ?>">
-                </div>
+            <div class="form-group">
+                <label>Kategori</label>
+                <input type="text" name="kategori" value="<?php echo $row['kategori']; ?>">
+            </div>
 
-                <div class="form-group">
-                    <label>Jenis</label>
-                    <select>
-                        <option>Pemasukan</option>
-                        <option>Pengeluaran</option>
-                    </select>
-                </div>
+            <div class="form-group">
+                <label>Jenis</label>
+                <select name="jenis">
 
-                <div class="form-group">
-                    <label>Jumlah</label>
-                    <input type="number" name="jumlah" value="<?php echo $row['jumlah']; ?>">
-                </div>
+                    <option value="pemasukan" <?php if($row['jenis']=="pemasukan") echo "selected"; ?>>
+                        Pemasukan
+                    </option>
 
-               <button type="submit" name="update">Update Transaksi</button>
+                    <option value="pengeluaran" <?php if($row['jenis']=="pengeluaran") echo "selected"; ?>>
+                        Pengeluaran
+                    </option>
 
-                <a href="index.php" class="back-btn">Kembali ke Dashboard</a>
+                </select>
+            </div>
 
-            </form>
+            <div class="form-group">
+                <label>Jumlah</label>
+                <input type="number" name="jumlah" value="<?php echo $row['jumlah']; ?>">
+            </div>
+
+            <button type="submit" name="update">Update Transaksi</button>
+
+            <a href="index.php" class="back-btn">Kembali ke Dashboard</a>
+
+        </form>
+
 
         </div>
 
