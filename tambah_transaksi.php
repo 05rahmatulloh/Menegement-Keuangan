@@ -1,3 +1,27 @@
+<?php
+include "config/database.php";
+
+if(isset($_POST['simpan'])){
+
+$tanggal = $_POST['tanggal'];
+$keterangan = $_POST['keterangan'];
+$kategori = $_POST['kategori'];
+$jenis = $_POST['jenis'];
+$jumlah = $_POST['jumlah'];
+
+mysqli_query($conn,"INSERT INTO transaksi
+(tanggal,keterangan,kategori,jenis,jumlah)
+VALUES
+('$tanggal','$keterangan','$kategori','$jenis','$jumlah')
+");
+
+header("Location: index.php");
+}
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -139,7 +163,7 @@
                     </div>
 
                     <div class="card-body p-4">
-                        <form action="#" method="POST">
+                        <form  method="POST">
                             
                             <div class="mb-3">
                                 <label for="tanggal" class="form-label">Tanggal Transaksi</label>
@@ -170,11 +194,11 @@
                                 <input type="number" class="form-control" id="jumlah" name="jumlah" placeholder="0" min="0" required>
                             </div>
 
-                            <button type="submit" class="btn btn-save">
-                                Simpan Data
-                            </button>
+                            <button type="submit" name="simpan" class="btn btn-save">
+Simpan Data
+</button>
 
-                            <a href="dashboard.html" class="btn btn-dashboard">
+                            <a href="index.php" class="btn btn-dashboard">
                                 Kembali ke Dashboard
                             </a>
 

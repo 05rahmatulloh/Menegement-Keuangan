@@ -1,3 +1,19 @@
+<?php
+include "config/database.php";
+
+$query = mysqli_query($conn,"SELECT * FROM transaksi ORDER BY tanggal DESC");
+
+$pemasukan = mysqli_query($conn,"SELECT SUM(jumlah) as total FROM transaksi WHERE jenis='pemasukan'");
+$data_pemasukan = mysqli_fetch_assoc($pemasukan);
+
+$pengeluaran = mysqli_query($conn,"SELECT SUM(jumlah) as total FROM transaksi WHERE jenis='pengeluaran'");
+$data_pengeluaran = mysqli_fetch_assoc($pengeluaran);
+
+$total_saldo = $data_pemasukan['total'] - $data_pengeluaran['total'];
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -190,7 +206,7 @@
     <div class="dashboard-grid">
         <div class="card">
             <h3>Total Saldo</h3>
-            <div class="amount" style="color: var(--primary);">Rp 5.000.000</div>
+            <div class="amount" style="color: var(--primary);">Rp <?php echo number_format($total_saldo); ?></div>
             <small><i class="fas fa-arrow-up" style="color: var(--success);"></i> +2.5% dari bulan lalu</small>
         </div>
         <div class="card">
@@ -239,40 +255,50 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>01 Mar 2026</td>
-                    <td><strong>Gaji Bulanan</strong><br><small style="color:#999">Kategori: Gaji</small></td>
-                    <td><span class="tag tag-pemasukan">Pemasukan</span></td>
-                    <td style="font-weight: bold; color: var(--success);">+ Rp 3.000.000</td>
-                    <td>
-                        <a href="#" class="btn-icon btn-edit"><i class="fas fa-edit"></i></a>
-                        <a href="#" class="btn-icon btn-delete"><i class="fas fa-trash"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>02 Mar 2026</td>
-                    <td><strong>Makan Siang</strong><br><small style="color:#999">Kategori: Makanan</small></td>
-                    <td><span class="tag tag-pengeluaran">Pengeluaran</span></td>
-                    <td style="font-weight: bold; color: var(--danger);">- Rp 50.000</td>
-                    <td>
-                        <a href="#" class="btn-icon btn-edit"><i class="fas fa-edit"></i></a>
-                        <a href="#" class="btn-icon btn-delete"><i class="fas fa-trash"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>03 Mar 2026</td>
-                    <td><strong>Ojek Online</strong><br><small style="color:#999">Kategori: Transport</small></td>
-                    <td><span class="tag tag-pengeluaran">Pengeluaran</span></td>
-                    <td style="font-weight: bold; color: var(--danger);">- Rp 20.000</td>
-                    <td>
-                        <a href="#" class="btn-icon btn-edit"><i class="fas fa-edit"></i></a>
-                        <a href="#" class="btn-icon btn-delete"><i class="fas fa-trash"></i></a>
-                    </td>
-                </tr>
-            </tbody>
+
+<?php
+$no = 1;
+while($row = mysqli_fetch_assoc($query)){
+?>
+
+<tr>
+<td><?php echo $no++; ?></td>
+
+<td><?php echo $row['tanggal']; ?></td>
+
+<td>
+<strong><?php echo $row['keterangan']; ?></strong>
+<br>
+<small style="color:#999">Kategori: <?php echo $row['kategori']; ?></small>
+</td>
+
+<td>
+<?php if($row['jenis']=="pemasukan"){ ?>
+<span class="tag tag-pemasukan">Pemasukan</span>
+<?php }else{ ?>
+<span class="tag tag-pengeluaran">Pengeluaran</span>
+<?php } ?>
+</td>
+
+<td style="font-weight:bold;">
+Rp <?php echo number_format($row['jumlah']); ?>
+</td>
+
+<td>
+<a href="edit_transaksi.php?id=<?php echo $row['id']; ?>" class="btn-icon btn-edit">
+<i class="fas fa-edit"></i>
+</a>
+
+<a href="hapus_transaksi.php?id=<?php echo $row['id']; ?>" class="btn-icon btn-delete">
+<i class="fas fa-trash"></i>
+</a>
+</td>
+
+</tr>
+
+<?php } ?>
+
+</tbody>
         </table>
     </div>
 </div>

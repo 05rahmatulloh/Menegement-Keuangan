@@ -1,3 +1,42 @@
+
+
+
+
+
+<?php
+include "config/database.php";
+
+$id = $_GET['id'];
+
+$data = mysqli_query($conn,"SELECT * FROM transaksi WHERE id='$id'");
+$row = mysqli_fetch_assoc($data);
+
+if(isset($_POST['update'])){
+
+$tanggal = $_POST['tanggal'];
+$keterangan = $_POST['keterangan'];
+$kategori = $_POST['kategori'];
+$jenis = $_POST['jenis'];
+$jumlah = $_POST['jumlah'];
+
+mysqli_query($conn,"UPDATE transaksi SET
+tanggal='$tanggal',
+keterangan='$keterangan',
+kategori='$kategori',
+jenis='$jenis',
+jumlah='$jumlah'
+WHERE id='$id'
+");
+
+header("Location: index.php");
+}
+?>
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -193,17 +232,17 @@
 
                 <div class="form-group">
                     <label>Tanggal</label>
-                    <input type="date">
+                    <input type="date" name="tanggal" value="<?php echo $row['tanggal']; ?>">
                 </div>
 
                 <div class="form-group">
                     <label>Keterangan</label>
-                    <input type="text" placeholder="Contoh: Beli makan siang">
+                   <input type="text" name="keterangan" value="<?php echo $row['keterangan']; ?>">
                 </div>
 
                 <div class="form-group">
                     <label>Kategori</label>
-                    <input type="text" placeholder="Contoh: Makanan, Transportasi">
+                   <input type="text" name="kategori" value="<?php echo $row['kategori']; ?>">
                 </div>
 
                 <div class="form-group">
@@ -216,10 +255,10 @@
 
                 <div class="form-group">
                     <label>Jumlah</label>
-                    <input type="number" placeholder="Masukkan jumlah uang">
+                    <input type="number" name="jumlah" value="<?php echo $row['jumlah']; ?>">
                 </div>
 
-                <button type="submit">Update Transaksi</button>
+               <button type="submit" name="update">Update Transaksi</button>
 
                 <a href="index.php" class="back-btn">Kembali ke Dashboard</a>
 
