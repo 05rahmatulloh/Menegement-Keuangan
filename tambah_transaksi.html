@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Data Keuangan</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* CSS Kustom */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #CAF0F8 0%, #E0F7FA 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+        }
+
+        .main-card {
+            background-color: #ffffff;
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .card-header-custom {
+            background-color: #ffffff;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+
+        .card-header-custom h3 {
+            margin: 0;
+            font-weight: 600;
+            color: #008080;
+            font-size: 1.5rem;
+        }
+
+        .form-label {
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control, .form-select {
+            background-color: #ffffff;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+            padding: 12px 15px;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            color: #333;
+        }
+
+        .form-control:focus, .form-select:focus {
+            background-color: #ffffff;
+            border-color: #CAF0F8;
+            box-shadow: 0 0 0 0.2rem rgba(202, 240, 248, 0.25);
+            color: #333;
+        }
+
+        ::placeholder {
+            color: #aaa;
+            opacity: 1;
+        }
+
+        /* Tombol Simpan */
+        .btn-save {
+            background-color: #00B4D8;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .btn-save:hover {
+            background-color: #0096C7;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 180, 216, 0.3);
+        }
+
+        /* Tombol Kembali ke Dashboard (Kustom Baru) */
+        .btn-dashboard {
+            background-color: transparent;
+            color: #008080;
+            border: 2px solid #00B4D8;
+            padding: 10px;
+            border-radius: 10px;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s ease;
+            margin-top: 0.75rem;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-dashboard:hover {
+            background-color: #CAF0F8;
+            color: #0077B6;
+            border-color: #0096C7;
+            transform: translateY(-2px);
+        }
+
+        .btn-save:active, .btn-dashboard:active {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 576px) {
+            .main-card {
+                margin: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                
+                <div class="card main-card">
+                    <div class="card-header-custom">
+                        <h3>Tambah Data Keuangan</h3>
+                        <small class="text-muted mt-1 d-block">Isi informasi transaksi di bawah ini</small>
+                    </div>
+
+                    <div class="card-body p-4">
+                        <form action="#" method="POST">
+                            
+                            <div class="mb-3">
+                                <label for="tanggal" class="form-label">Tanggal Transaksi</label>
+                                <input type="date" class="form-control" id="tanggal" name="tanggal" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="keterangan" class="form-label">Keterangan</label>
+                                <input type="text" class="form-control" id="keterangan" name="keterangan" placeholder="Contoh: Gaji Bulanan" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="kategori" class="form-label">Kategori</label>
+                                <input type="text" class="form-control" id="kategori" name="kategori" placeholder="Contoh: Gaji Pokok" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="jenis" class="form-label">Jenis Transaksi</label>
+                                <select class="form-select" id="jenis" name="jenis" required>
+                                    <option value="" selected disabled>Pilih Jenis...</option>
+                                    <option value="pemasukan">Pemasukan</option>
+                                    <option value="pengeluaran">Pengeluaran</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="jumlah" class="form-label">Jumlah (Rp)</label>
+                                <input type="number" class="form-control" id="jumlah" name="jumlah" placeholder="0" min="0" required>
+                            </div>
+
+                            <button type="submit" class="btn btn-save">
+                                Simpan Data
+                            </button>
+
+                            <a href="dashboard.html" class="btn btn-dashboard">
+                                Kembali ke Dashboard
+                            </a>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
