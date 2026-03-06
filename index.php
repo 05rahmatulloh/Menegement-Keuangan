@@ -2,14 +2,15 @@
 include "config/database.php";
 
 $query = mysqli_query($conn,"SELECT * FROM transaksi ORDER BY tanggal DESC");
-
 $pemasukan = mysqli_query($conn,"SELECT SUM(jumlah) as total FROM transaksi WHERE jenis='pemasukan'");
 $data_pemasukan = mysqli_fetch_assoc($pemasukan);
+$total_pemasukan = $data_pemasukan['total'] ?? 0;
 
 $pengeluaran = mysqli_query($conn,"SELECT SUM(jumlah) as total FROM transaksi WHERE jenis='pengeluaran'");
 $data_pengeluaran = mysqli_fetch_assoc($pengeluaran);
+$total_pengeluaran = $data_pengeluaran['total'] ?? 0;
 
-$total_saldo = $data_pemasukan['total'] - $data_pengeluaran['total'];
+$total_saldo = $total_pemasukan - $total_pengeluaran;
 ?>
 
 
