@@ -211,16 +211,20 @@ $total_saldo = $data_pemasukan['total'] - $data_pengeluaran['total'];
         </div>
         <div class="card">
             <h3>Pemasukan</h3>
-            <div class="amount" style="color: var(--success);">Rp 7.500.000</div>
+           <div class="amount" style="color: var(--success);">
+               Rp <?php echo number_format($total_pemasukan,0,',','.'); ?>
+           </div>
         </div>
         <div class="card">
             <h3>Pengeluaran</h3>
-            <div class="amount" style="color: var(--danger);">Rp 2.500.000</div>
+            <div class="amount" style="color: var(--danger);">
+                Rp <?php echo number_format($total_pengeluaran,0,',','.'); ?>
+            </div>
         </div>
     </div>
 
     <div class="action-bar">
-        <a href="#" class="btn btn-primary">
+        <a href="tambah_transaksi.php" class="btn btn-primary">
             <i class="fas fa-plus"></i> Tambah Transaksi
         </a>
         
