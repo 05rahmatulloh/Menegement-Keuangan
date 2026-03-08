@@ -2,7 +2,7 @@
 
 $host = "localhost";
 $user = "root";
-$password = "";
+$password = "05desember2005";
 $db = "finance_app";
 
 $conn = mysqli_connect($host, $user, $password, $db);
